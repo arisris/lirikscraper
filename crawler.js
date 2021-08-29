@@ -37,14 +37,16 @@ function runCrawler(db) {
       title = title.replace("lirik lagu", "").trim();
       const content = matchKonten($("body").html());
       if (content) {
-        const [artistLetter, artistName] = new String(response.request.uri.pathname)
+        const [artistLetter, artistName] = new String(
+          response.request.uri.pathname
+        )
           .split("/")
           .filter((i) => i);
         const data = {
           id: UID(),
           artistLetter,
           artistName,
-          songName,
+          songName: title,
           content,
         };
         db.post("collections/lirikwebid", data)
