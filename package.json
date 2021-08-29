@@ -1,0 +1,10 @@
+{
+  "name": "lirik.web.id",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "crawler": "^1.3.0",
+    "total4": "^0.0.45"
+  }
+}

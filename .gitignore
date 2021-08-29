@@ -1,0 +1,10 @@
+# files
+.env
+.secret
+config
+index.js.json
+yarn.lock
+
+# folder
+node_modules
+tmp
