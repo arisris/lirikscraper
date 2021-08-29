@@ -34,24 +34,29 @@ function runCrawler(db) {
     } else {
       const $ = response.$;
       let title = $("h1.entry-title").text();
-      title = title.replace("lirik lagu", "");
-      const lirik = matchKonten($("body").html());
-      if (lirik) {
+      title = title.replace("lirik lagu", "").trim();
+      const content = matchKonten($("body").html());
+      if (content) {
+        const [artistLetter, artistName] = new String(response.request.uri.pathname)
+          .split("/")
+          .filter((i) => i);
         const data = {
-          pathname: response.request.uri.pathname,
-          title,
-          lirik,
+          id: UID(),
+          artistLetter,
+          artistName,
+          songName,
+          content,
         };
-        // db.post("collections/lirikwebid", data)
-        //   .then(() => {
-        //     console.log("Successful pushing data", title);
-        //   })
-        //   .catch(() => {
-        //     console.log("Failed pushing data", title);
-        //   })
-        //   .finally(done);
-        console.log(data);
-        done();
+        db.post("collections/lirikwebid", data)
+          .then(() => {
+            console.log("Successful pushing data", title);
+          })
+          .catch(() => {
+            console.log("Failed pushing data", title);
+          })
+          .finally(done);
+        // console.log(data);
+        // done();
         return;
       }
     }
