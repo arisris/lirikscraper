@@ -25,7 +25,7 @@ crawler.on("drain", () => {
   console.info("Well done...");
 });
 
-function runCrawler() {
+function runCrawler(db) {
   const handleLirikPage = (err, response, done) => {
     if (err) {
       console.error(err.message);
@@ -35,15 +35,19 @@ function runCrawler() {
       title = title.replace("lirik lagu", "");
       const lirik = matchKonten($("body").html());
       if (lirik) {
-        console.log("Pushing Data", title);
         const data = {
-          id: UID(),
           pathname: response.request.uri.pathname,
           title,
           lirik,
         };
-        console.log(data);
-        done();
+        db.post("collections/lirikwebid", data)
+          .then(() => {
+            console.log("Successful pushing data", title);
+          })
+          .catch(() => {
+            console.log("Failed pushing data", title);
+          })
+          .finally(done);
         return;
       }
     }
@@ -74,7 +78,7 @@ function runCrawler() {
   };
   collectSitemapLinks((err, links) => {
     if (err) throw err;
-    links = [links[0]]; // testing only
+    //links = [links[0]]; // testing only
     crawler.queue(
       links.map((uri) => ({
         uri,
@@ -111,5 +115,22 @@ function matchKonten(raw) {
   return konten !== null ? konten[0] : null;
 }
 LOAD("definitions, modules", () => {
-  console.log(CONF.ASTRA_DB)
+  const db = MODULE("astradb");
+  db.get("collections/lirikwebid")
+    .then((d) => {
+      if (d.output.status === 404) {
+        db.post("collections", { name: "lirikwebid" })
+          .then((d) => {
+            if (d.output.status === 201) {
+              runCrawler(db);
+            } else {
+              throw new Error("Something error...");
+            }
+          })
+          .catch(console.error);
+      } else {
+        runCrawler(db);
+      }
+    })
+    .catch(console.error);
 });
