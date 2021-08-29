@@ -2,6 +2,8 @@ require("total4");
 const Crawler = require("crawler");
 const cheerio = require("cheerio");
 
+const numnum = parseInt(process.argv[2]) || 1;
+
 const crawler = new Crawler({
   rateLimit: 2000, // slow down
   maxConnections: 1, // only one connection
@@ -40,14 +42,16 @@ function runCrawler(db) {
           title,
           lirik,
         };
-        db.post("collections/lirikwebid", data)
-          .then(() => {
-            console.log("Successful pushing data", title);
-          })
-          .catch(() => {
-            console.log("Failed pushing data", title);
-          })
-          .finally(done);
+        // db.post("collections/lirikwebid", data)
+        //   .then(() => {
+        //     console.log("Successful pushing data", title);
+        //   })
+        //   .catch(() => {
+        //     console.log("Failed pushing data", title);
+        //   })
+        //   .finally(done);
+        console.log(data);
+        done();
         return;
       }
     }
@@ -76,17 +80,22 @@ function runCrawler(db) {
     }
     done();
   };
-  collectSitemapLinks((err, links) => {
-    if (err) throw err;
-    //links = [links[0]]; // testing only
-    crawler.queue(
-      links.map((uri) => ({
-        uri,
-        callback: handleSitemapPage,
-        priority: 3,
-      }))
-    );
+  crawler.queue({
+    uri: `https://lirik.web.id/sitemap/${numnum}/`,
+    callback: handleSitemapPage,
+    priority: 3,
   });
+  // collectSitemapLinks((err, links) => {
+  //   if (err) throw err;
+  //   //links = [links[0]]; // testing only
+  //   crawler.queue(
+  //     links.map((uri) => ({
+  //       uri,
+  //       callback: handleSitemapPage,
+  //       priority: 3,
+  //     }))
+  //   );
+  // });
 }
 
 function collectSitemapLinks(callback) {
