@@ -5,6 +5,8 @@
   "license": "MIT",
   "dependencies": {
     "crawler": "^1.3.0",
+    "dbms": "^1.0.3",
+    "mysql2": "^2.3.0",
     "total4": "^0.0.45"
   }
 }

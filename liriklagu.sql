@@ -1,0 +1,12 @@
+CREATE TABLE IF NOT EXISTS lyrics (
+  `uid` VARCHAR(20) NOT NULL,
+  `slug` VARCHAR(128) NOT NULL,
+  `artist` VARCHAR(256),
+  `song` VARCHAR(256), 
+  `content` MEDIUMTEXT,
+  `source` VARCHAR(128),
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`uid`)
+);
+
+ENGINE = InnoDB;

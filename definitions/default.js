@@ -1,0 +1,1 @@
+require("dbms").init(CONF.MYSQL_URL);
