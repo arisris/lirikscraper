@@ -90,7 +90,7 @@ function crawlThePage(pageNum) {
           const $$ = cheerio.load(konten);
           $$('ul > li > a').each(async (_, anchor) => {
             let uri = $$(anchor).attr('href');
-            uri = decodeURIComponent(uri);
+            //uri = decodeURIComponent(uri);
             crawler.queue({
               uri,
               callback: handleLirikPage,
