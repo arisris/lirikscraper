@@ -116,6 +116,7 @@ function crawlThePage(pageNum) {
 }
 const sleep = (s) => new Promise((resolve) => setTimeout(resolve, 3000));
 LOAD('definitions, modules', async () => {
+  //console.log(process.env);
   for await (let i of Array(totalPages)
     .fill(null)
     .slice(initialNumPage - 1)

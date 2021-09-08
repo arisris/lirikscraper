@@ -1,12 +1,10 @@
 CREATE TABLE IF NOT EXISTS lyrics (
-  `uid` VARCHAR(20) NOT NULL,
-  `slug` VARCHAR(128) NOT NULL,
+  `uid` VARCHAR(32) NOT NULL,
+  `slug` VARCHAR(256) NOT NULL,
   `artist` VARCHAR(256),
   `song` VARCHAR(256), 
   `content` MEDIUMTEXT,
-  `source` VARCHAR(128),
+  `source` VARCHAR(256),
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`uid`)
-);
-
-ENGINE = InnoDB;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
