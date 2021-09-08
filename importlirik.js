@@ -54,7 +54,6 @@ const schemas = `CREATE TABLE IF NOT EXISTS lirik (
   content MEDIUMTEXT,
   PRIMARY KEY (uid)
 );
-
 `;
 
 LOAD("definitions, modules", async () => {

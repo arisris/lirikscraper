@@ -1,1 +1,1 @@
-require("dbms").init(CONF.MYSQL_URL);
+require("dbms").init(CONF.LOCAL_DATABASE_URL);

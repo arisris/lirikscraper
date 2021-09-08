@@ -55,4 +55,13 @@ DEF.purl = (u) => {
   };
 };
 
-const astra = MODULE("astradb");
+DEF.ucFirst = (str) =>
+  str
+    .split("")
+    .map((v, i) => (i === 0 ? v.toUpperCase() : v))
+    .join("");
+DEF.ucWords = (str) =>
+  str
+    .split(" ")
+    .map((i) => DEF.ucFirst(i))
+    .join(" ");
