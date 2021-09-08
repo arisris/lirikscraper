@@ -3,9 +3,13 @@
 .secret
 config
 index.js.json
+index_*.js.json
+index_*.js
 yarn.lock
 
 # folder
 node_modules
 tmp
 databases
+threads/*/logs
+threads/*/tmp
