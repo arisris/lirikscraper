@@ -1,1 +1,1 @@
-worker: node crawler-nosql.js
+web: npm start
