@@ -1,5 +1,8 @@
 exports.install = function() {
-  ROUTE('GET /', index);
+  ROUTE('GET /testing-db', index);
+  ROUTE('/', function() {
+    this.html(`<h3>Its Works</h3>`);
+  });
 };
 
 function index() {
