@@ -5,11 +5,11 @@ config
 index.js.json
 index_*.js.json
 index_*.js
+index*.pid
 yarn.lock
 
 # folder
 node_modules
 tmp
-databases
 threads/*/logs
 threads/*/tmp

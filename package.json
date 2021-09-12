@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "start": "node index.js 8080 release"
+  },
   "dependencies": {
     "crawler": "^1.3.0",
     "dbms": "^1.0.3",
